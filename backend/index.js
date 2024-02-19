@@ -8,7 +8,7 @@ require("dotenv").config();
 const app = express();
 app.use(express.json(),cookieParser());
 app.use("/users",userRouter);
-app.get("/",auth,(req,res)=>{
+app.get("/",(req,res)=>{
     res.status(200).send({
         msg:"This is the homepage"
     })
