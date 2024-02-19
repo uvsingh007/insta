@@ -3,10 +3,11 @@ const { connection } = require("./config/db");
 const cookieParser = require("cookie-parser");
 const { userRouter } = require("./controller/user.routes");
 const { auth } = require("./middleware/auth.middleware");
+const cors  = require('cors')
 require("dotenv").config();
 
 const app = express();
-app.use(express.json(),cookieParser());
+app.use(express.json(),cors(),cookieParser());
 app.use("/users",userRouter);
 app.get("/",(req,res)=>{
     res.status(200).send({

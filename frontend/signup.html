@@ -33,16 +33,57 @@
     </header>
     <form>
         <h1>Enter the details </h1>
-        <input type="text" placeholder="Enter the username" />
-        <input type="text" placeholder="Enter the email" />
-        <input type="password" placeholder="Enter the password" />
-        <input type="text" placeholder="Enter the city" />
-        <input type="number" placeholder="Enter the age" />
-        <select>
+        <input id="username" type="text" placeholder="Enter the username" />
+        <input id="email" type="text" placeholder="Enter the email" />
+        <input id="password" type="password" placeholder="Enter the password" />
+        <input id="city" type="text" placeholder="Enter the city" />
+        <input id="age" type="number" placeholder="Enter the age" />
+        <select id="gender">
             <option>male</option>
             <option>female</option>
         </select>
-        <button type="submit">Submit</button>
+        <button id="submit">Submit</button>
     </form>
+    <script>
+        const email = document.getElementById("email")
+        const password = document.getElementById("password")
+        const username= document.getElementById("username")
+        const city = document.getElementById("city")
+        const gender = document.getElementById("gender")
+        const age = document.getElementById("age")
+        const submit = document.getElementById("submit")
+
+        async function addUser(){
+            try{
+                const obj={
+                    username:username.value,
+                    email:email.value,
+                    password:password.value,
+                    city:city.value,
+                    age:age.value,
+                    gender:gender.value
+                }
+                const res = await fetch("https://insta-lake.vercel.app/users/register",{
+                    method:"POST",
+                    headers:{
+                        "Content-Type":"application/json"
+                    },
+                    body:JSON.stringify(obj)
+                })
+                const data = await res.json();
+                console.log(data);
+                window.alert("please login to enter the app")
+                window.location.href="./login.html"
+            }
+            catch(err){
+                console.log(err);
+            }
+        }
+
+        submit.addEventListener("click",(e)=>{
+            e.preventDefault()
+            addUser()
+        })
+    </script>
 </body>
 </html>
